@@ -4,8 +4,10 @@ FROM php:8.3-fpm-alpine
 ADD https://github.com/mlocati/docker-php-extension-installer/releases/latest/download/install-php-extensions /usr/local/bin/
 
 # Install packages
-RUN apk add --no-cache curl bash vim build-base zlib-dev oniguruma-dev autoconf bash
+RUN apk add --no-cache curl bash vim build-base zlib-dev oniguruma-dev autoconf bash supervisor
 RUN apk add --update linux-headers
+
+RUN mkdir -p /etc/supervisor/conf.d
 
 # Configure non-root user.
 ARG PUID=1000
@@ -19,3 +21,6 @@ RUN chmod +x /usr/local/bin/install-php-extensions && \
 
 # Switch to www-data user
 USER www-data
+
+# Set Supervisor to be the entry point
+CMD ["/usr/bin/supervisord", "-n", "-c", "/etc/supervisor/supervisord.conf"]
