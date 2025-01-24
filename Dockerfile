@@ -24,4 +24,3 @@ USER www-data
 
 # Set Supervisor to be the entry point
 CMD ["/usr/bin/supervisord", "-n", "-c", "/etc/supervisor/supervisord.conf"]
-CMD ["php-fpm"]
