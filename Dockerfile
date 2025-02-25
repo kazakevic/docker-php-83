@@ -22,4 +22,4 @@ RUN chmod +x /usr/local/bin/install-php-extensions && \
 # Switch to www-data user
 USER www-data
 
-CMD ["/usr/bin/supervisord", "-c", "/etc/supervisor/conf.d/supervisord.conf"]
+CMD ["php-fpm"]
